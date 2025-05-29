@@ -1,9 +1,15 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import { AppLayout } from "./components/layout/AppLayout";
+import Dashboard from "./pages/Dashboard";
+import Clientes from "./pages/Clientes";
+import Funcionarios from "./pages/Funcionarios";
+import Orcamentos from "./pages/Orcamentos";
+import Financeiro from "./pages/Financeiro";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -14,11 +20,23 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AppLayout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/clientes" element={<Clientes />} />
+            <Route path="/funcionarios" element={<Funcionarios />} />
+            <Route path="/orcamentos" element={<Orcamentos />} />
+            <Route path="/financeiro" element={<Financeiro />} />
+            {/* Rotas em desenvolvimento */}
+            <Route path="/fornecedores" element={<div className="p-8 text-center"><h1 className="text-2xl">Fornecedores - Em Desenvolvimento</h1></div>} />
+            <Route path="/pecas" element={<div className="p-8 text-center"><h1 className="text-2xl">Peças - Em Desenvolvimento</h1></div>} />
+            <Route path="/servicos" element={<div className="p-8 text-center"><h1 className="text-2xl">Serviços - Em Desenvolvimento</h1></div>} />
+            <Route path="/oficina" element={<div className="p-8 text-center"><h1 className="text-2xl">Oficina - Em Desenvolvimento</h1></div>} />
+            <Route path="/relacionamento" element={<div className="p-8 text-center"><h1 className="text-2xl">Relacionamento - Em Desenvolvimento</h1></div>} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AppLayout>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
