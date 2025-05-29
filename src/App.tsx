@@ -8,6 +8,9 @@ import { AppLayout } from "./components/layout/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Clientes from "./pages/Clientes";
 import Funcionarios from "./pages/Funcionarios";
+import Fornecedores from "./pages/Fornecedores";
+import Pecas from "./pages/Pecas";
+import Servicos from "./pages/Servicos";
 import Orcamentos from "./pages/Orcamentos";
 import Financeiro from "./pages/Financeiro";
 import NotFound from "./pages/NotFound";
@@ -25,12 +28,12 @@ const App = () => (
             <Route path="/" element={<Dashboard />} />
             <Route path="/clientes" element={<Clientes />} />
             <Route path="/funcionarios" element={<Funcionarios />} />
+            <Route path="/fornecedores" element={<Fornecedores />} />
+            <Route path="/pecas" element={<Pecas />} />
+            <Route path="/servicos" element={<Servicos />} />
             <Route path="/orcamentos" element={<Orcamentos />} />
             <Route path="/financeiro" element={<Financeiro />} />
             {/* Rotas em desenvolvimento */}
-            <Route path="/fornecedores" element={<div className="p-8 text-center"><h1 className="text-2xl">Fornecedores - Em Desenvolvimento</h1></div>} />
-            <Route path="/pecas" element={<div className="p-8 text-center"><h1 className="text-2xl">Peças - Em Desenvolvimento</h1></div>} />
-            <Route path="/servicos" element={<div className="p-8 text-center"><h1 className="text-2xl">Serviços - Em Desenvolvimento</h1></div>} />
             <Route path="/oficina" element={<div className="p-8 text-center"><h1 className="text-2xl">Oficina - Em Desenvolvimento</h1></div>} />
             <Route path="/relacionamento" element={<div className="p-8 text-center"><h1 className="text-2xl">Relacionamento - Em Desenvolvimento</h1></div>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

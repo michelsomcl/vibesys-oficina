@@ -1,4 +1,3 @@
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -45,6 +44,7 @@ export const ClientForm = ({ onSuccess }: ClientFormProps) => {
       ano: veiculoData.ano,
       placa: veiculoData.placa,
       km: veiculoData.km || null,
+      cliente_id: "" // This will be set by the mutation after cliente is created
     } : undefined
 
     createCliente.mutate({ cliente: clienteData, veiculo }, {
