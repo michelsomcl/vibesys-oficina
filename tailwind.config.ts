@@ -58,13 +58,13 @@ export default {
 					foreground: '#000000'
 				},
 				sidebar: {
-					DEFAULT: '#000000',
-					foreground: '#FFFFFF',
-					primary: '#FFA500',
+					DEFAULT: '#FFFFFF', // Sidebar branca
+					foreground: '#000000', // Texto preto
+					primary: '#FFA500', // Laranja
 					'primary-foreground': '#000000',
-					accent: '#FFD700',
+					accent: '#FFD700', // Amarelo
 					'accent-foreground': '#000000',
-					border: '#333333',
+					border: '#e5e5e5', // Borda cinza clara
 					ring: '#FFA500'
 				}
 			},
