@@ -9,16 +9,432 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      clientes: {
+        Row: {
+          aniversario: string | null
+          created_at: string
+          documento: string
+          endereco: string | null
+          id: string
+          nome: string
+          telefone: string | null
+          tipo: string
+          updated_at: string
+        }
+        Insert: {
+          aniversario?: string | null
+          created_at?: string
+          documento: string
+          endereco?: string | null
+          id?: string
+          nome: string
+          telefone?: string | null
+          tipo: string
+          updated_at?: string
+        }
+        Update: {
+          aniversario?: string | null
+          created_at?: string
+          documento?: string
+          endereco?: string | null
+          id?: string
+          nome?: string
+          telefone?: string | null
+          tipo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      contas_gerais: {
+        Row: {
+          created_at: string
+          data_pagamento: string | null
+          descricao: string
+          id: string
+          numero: string
+          status: Database["public"]["Enums"]["status_conta"]
+          tipo: Database["public"]["Enums"]["tipo_conta_geral"]
+          updated_at: string
+          valor: number
+          vencimento: string
+        }
+        Insert: {
+          created_at?: string
+          data_pagamento?: string | null
+          descricao: string
+          id?: string
+          numero: string
+          status?: Database["public"]["Enums"]["status_conta"]
+          tipo: Database["public"]["Enums"]["tipo_conta_geral"]
+          updated_at?: string
+          valor: number
+          vencimento: string
+        }
+        Update: {
+          created_at?: string
+          data_pagamento?: string | null
+          descricao?: string
+          id?: string
+          numero?: string
+          status?: Database["public"]["Enums"]["status_conta"]
+          tipo?: Database["public"]["Enums"]["tipo_conta_geral"]
+          updated_at?: string
+          valor?: number
+          vencimento?: string
+        }
+        Relationships: []
+      }
+      contas_receber: {
+        Row: {
+          cliente_id: string
+          created_at: string
+          data_recebimento: string | null
+          forma_pagamento: Database["public"]["Enums"]["forma_pagamento"] | null
+          id: string
+          numero: string
+          orcamento_id: string | null
+          status: Database["public"]["Enums"]["status_conta"]
+          updated_at: string
+          valor: number
+          vencimento: string
+        }
+        Insert: {
+          cliente_id: string
+          created_at?: string
+          data_recebimento?: string | null
+          forma_pagamento?:
+            | Database["public"]["Enums"]["forma_pagamento"]
+            | null
+          id?: string
+          numero: string
+          orcamento_id?: string | null
+          status?: Database["public"]["Enums"]["status_conta"]
+          updated_at?: string
+          valor: number
+          vencimento: string
+        }
+        Update: {
+          cliente_id?: string
+          created_at?: string
+          data_recebimento?: string | null
+          forma_pagamento?:
+            | Database["public"]["Enums"]["forma_pagamento"]
+            | null
+          id?: string
+          numero?: string
+          orcamento_id?: string | null
+          status?: Database["public"]["Enums"]["status_conta"]
+          updated_at?: string
+          valor?: number
+          vencimento?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contas_receber_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contas_receber_orcamento_id_fkey"
+            columns: ["orcamento_id"]
+            isOneToOne: false
+            referencedRelation: "orcamentos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      funcionarios: {
+        Row: {
+          categoria: Database["public"]["Enums"]["categoria_funcionario"]
+          created_at: string
+          documento: string
+          endereco: string | null
+          id: string
+          nome: string
+          telefone: string | null
+          updated_at: string
+        }
+        Insert: {
+          categoria: Database["public"]["Enums"]["categoria_funcionario"]
+          created_at?: string
+          documento: string
+          endereco?: string | null
+          id?: string
+          nome: string
+          telefone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          categoria?: Database["public"]["Enums"]["categoria_funcionario"]
+          created_at?: string
+          documento?: string
+          endereco?: string | null
+          id?: string
+          nome?: string
+          telefone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      orcamento_pecas: {
+        Row: {
+          created_at: string
+          id: string
+          orcamento_id: string
+          peca_id: string
+          quantidade: number
+          valor_unitario: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          orcamento_id: string
+          peca_id: string
+          quantidade: number
+          valor_unitario: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          orcamento_id?: string
+          peca_id?: string
+          quantidade?: number
+          valor_unitario?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orcamento_pecas_orcamento_id_fkey"
+            columns: ["orcamento_id"]
+            isOneToOne: false
+            referencedRelation: "orcamentos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orcamento_pecas_peca_id_fkey"
+            columns: ["peca_id"]
+            isOneToOne: false
+            referencedRelation: "pecas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orcamento_servicos: {
+        Row: {
+          created_at: string
+          horas: number
+          id: string
+          orcamento_id: string
+          servico_id: string
+          valor_hora: number
+        }
+        Insert: {
+          created_at?: string
+          horas: number
+          id?: string
+          orcamento_id: string
+          servico_id: string
+          valor_hora: number
+        }
+        Update: {
+          created_at?: string
+          horas?: number
+          id?: string
+          orcamento_id?: string
+          servico_id?: string
+          valor_hora?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orcamento_servicos_orcamento_id_fkey"
+            columns: ["orcamento_id"]
+            isOneToOne: false
+            referencedRelation: "orcamentos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orcamento_servicos_servico_id_fkey"
+            columns: ["servico_id"]
+            isOneToOne: false
+            referencedRelation: "servicos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orcamentos: {
+        Row: {
+          cliente_id: string
+          created_at: string
+          data_orcamento: string
+          id: string
+          numero: string
+          status: Database["public"]["Enums"]["status_orcamento"]
+          updated_at: string
+          validade: string
+          valor_total: number
+          veiculo_id: string
+        }
+        Insert: {
+          cliente_id: string
+          created_at?: string
+          data_orcamento: string
+          id?: string
+          numero: string
+          status?: Database["public"]["Enums"]["status_orcamento"]
+          updated_at?: string
+          validade: string
+          valor_total?: number
+          veiculo_id: string
+        }
+        Update: {
+          cliente_id?: string
+          created_at?: string
+          data_orcamento?: string
+          id?: string
+          numero?: string
+          status?: Database["public"]["Enums"]["status_orcamento"]
+          updated_at?: string
+          validade?: string
+          valor_total?: number
+          veiculo_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orcamentos_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "orcamentos_veiculo_id_fkey"
+            columns: ["veiculo_id"]
+            isOneToOne: false
+            referencedRelation: "veiculos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pecas: {
+        Row: {
+          created_at: string
+          estoque: number | null
+          id: string
+          nome: string
+          updated_at: string
+          valor_unitario: number
+        }
+        Insert: {
+          created_at?: string
+          estoque?: number | null
+          id?: string
+          nome: string
+          updated_at?: string
+          valor_unitario: number
+        }
+        Update: {
+          created_at?: string
+          estoque?: number | null
+          id?: string
+          nome?: string
+          updated_at?: string
+          valor_unitario?: number
+        }
+        Relationships: []
+      }
+      servicos: {
+        Row: {
+          created_at: string
+          id: string
+          nome: string
+          updated_at: string
+          valor_hora: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          nome: string
+          updated_at?: string
+          valor_hora: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          nome?: string
+          updated_at?: string
+          valor_hora?: number
+        }
+        Relationships: []
+      }
+      veiculos: {
+        Row: {
+          ano: string
+          cliente_id: string
+          created_at: string
+          id: string
+          km: string | null
+          marca: string
+          modelo: string
+          placa: string
+          updated_at: string
+        }
+        Insert: {
+          ano: string
+          cliente_id: string
+          created_at?: string
+          id?: string
+          km?: string | null
+          marca: string
+          modelo: string
+          placa: string
+          updated_at?: string
+        }
+        Update: {
+          ano?: string
+          cliente_id?: string
+          created_at?: string
+          id?: string
+          km?: string | null
+          marca?: string
+          modelo?: string
+          placa?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "veiculos_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_conta_geral_number: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
+      generate_conta_receber_number: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
+      generate_orcamento_number: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
-      [_ in never]: never
+      categoria_funcionario: "Mecânico" | "Pintor" | "Lavador"
+      forma_pagamento: "PIX" | "Cartão" | "Dinheiro" | "Transferência"
+      status_conta: "Pendente" | "Pago" | "Recebido" | "Atrasado" | "Cancelado"
+      status_orcamento: "Pendente" | "Aprovado" | "Reprovado" | "Cancelado"
+      tipo_conta_geral: "Fixa" | "Variável"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +549,12 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      categoria_funcionario: ["Mecânico", "Pintor", "Lavador"],
+      forma_pagamento: ["PIX", "Cartão", "Dinheiro", "Transferência"],
+      status_conta: ["Pendente", "Pago", "Recebido", "Atrasado", "Cancelado"],
+      status_orcamento: ["Pendente", "Aprovado", "Reprovado", "Cancelado"],
+      tipo_conta_geral: ["Fixa", "Variável"],
+    },
   },
 } as const
